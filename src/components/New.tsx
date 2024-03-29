@@ -52,7 +52,7 @@ const New = () => {
                 </div>
                 <div className="product-actions">
                   <Link
-                    to={`/product/${product.id}`}
+                    to={`/product/${product._id}`}
                     className="btn product-action__quickview"
                   >
                     Quick View

@@ -7,6 +7,10 @@ import ContactPage from "./pages/contact";
 import NotfoundPage from "./pages/notfound";
 import LayoutWebsite from "./components/LayoutWebsite";
 import DetailProduct from "./pages/detail-product";
+import LayoutAdmin from "./components/layouts/LayoutAdmin";
+import ProductManagement from "./pages/admin/product";
+import ProductAdd from "./pages/admin/product/add";
+import ProductEditPage from "./pages/admin/product/edit";
 
 function App() {
   return (
@@ -20,6 +24,12 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotfoundPage />} />
         </Route>
+        <Route path="admin" element={<LayoutAdmin />}>
+          <Route path="products" element={<ProductManagement />} />
+          <Route path="products/add" element={<ProductAdd />} />
+          <Route path="products/:id/edit" element={<ProductEditPage />} />
+        </Route>
+        <Route path="*" element={<NotfoundPage />} />
       </Routes>
     </>
   );

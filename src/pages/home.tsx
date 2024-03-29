@@ -1,12 +1,4 @@
-import {
-  Banner,
-  Blog,
-  Footer,
-  Header,
-  New,
-  Services,
-  Shop,
-} from "@/components";
+import { Banner, Blog, New, Services, Shop } from "@/components";
 
 const HomePage = () => {
   return (
