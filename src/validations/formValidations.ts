@@ -6,8 +6,8 @@ export const productShema = Joi.object({
   description: Joi.string(),
   //   gallery: Joi.array().items(Joi.string()),
   image: Joi.string(),
-  category: Joi.string(),
+  // category: Joi.string().required(),
   discount: Joi.number(),
-  futured: Joi.boolean(),
+  featured: Joi.boolean(),
   countInstock: Joi.number(),
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import logo from "@/assets/logo.svg";
 
 const Footer = () => {
   return (
@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-list">
           <div className="footer-item">
-            <img src="./assets/logo.svg" alt="#" />
+            <img src={logo} alt="#" />
             <p className="footer__address">
               400 University Drive Suite 200 Coral Gables, FL 33134 USA
             </p>

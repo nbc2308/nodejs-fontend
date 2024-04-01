@@ -1,5 +1,9 @@
+import user from "@/assets/icons/1.svg";
+import user2 from "@/assets/icons/2.svg";
+import user3 from "@/assets/icons/3.svg";
+import user4 from "@/assets/icons/4.svg";
 import Logo from "@/assets/logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -40,24 +44,24 @@ const Header = () => {
             <div className="header-item-user">
               <span>
                 <a href="login.html">
-                  <img src="./assets/icons/1.svg" />
+                  <img src={user} />
                 </a>
               </span>
             </div>
             <div className="header-item-user">
               <span>
-                <img src="./assets/icons/2.svg" />
+                <img src={user2} />
               </span>
             </div>
             <div className="header-item-user">
               <span>
-                <img src="./assets/icons/3.svg" />
+                <img src={user3} />
               </span>
             </div>
             <div className="header-item-user">
               <a href="cart.html">
                 <span>
-                  <img src="./assets/icons/4.svg" />
+                  <img src={user4} />
                 </span>
               </a>
             </div>

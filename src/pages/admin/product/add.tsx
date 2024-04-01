@@ -15,13 +15,15 @@ import { productShema } from "@/validations/formValidations";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useToast } from "@/components/ui/use-toast";
 
 type Inputs = {
-  image: string;
   name: string;
-  category?: string;
   price: number;
-  // gallery?: string[];
+  // category?: string;
+  image: string;
+
+  // // gallery?: string[];
   description: string;
   discount: number;
   featured: boolean;
@@ -29,13 +31,14 @@ type Inputs = {
 };
 
 const ProductAdd = () => {
+  const { toast } = useToast();
   const form = useForm({
     resolver: joiResolver(productShema),
     defaultValues: {
       name: "",
       price: 0,
-      category: "",
-      // gallery: [],
+      // category: "",
+      // // gallery: [],
       description: "",
       discount: 0,
       featured: false,
@@ -49,10 +52,17 @@ const ProductAdd = () => {
       const { data } = await addProduct(product);
       return data;
     },
+    onSuccess: () => {
+      form.reset();
+      toast({
+        title: "Thêm sản phẩm thành công",
+      });
+    },
   });
 
   const onSubmit: SubmitHandler<Inputs> = (product: IProduct) => {
     mutation.mutate(product);
+    console.log(product);
   };
 
   return (
@@ -87,7 +97,7 @@ const ProductAdd = () => {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="category"
             render={({ field }) => (
@@ -95,20 +105,6 @@ const ProductAdd = () => {
                 <FormLabel htmlFor="category">Category</FormLabel>
                 <FormControl>
                   <Input {...field} id="category" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* <FormField
-            control={form.control}
-            name="gallery"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="gallery">Gallery</FormLabel>
-                <FormControl>
-                  <Input {...field} id="gallery" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -162,7 +158,6 @@ const ProductAdd = () => {
             name="featured"
             render={({ field }) => (
               <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                <FormLabel htmlFor="featured">Featured</FormLabel>
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -170,17 +165,14 @@ const ProductAdd = () => {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel htmlFor="featured">
-                    Use different settings for my mobile devies
-                  </FormLabel>
+                  <FormLabel htmlFor="featured">Featured?</FormLabel>
                 </div>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button variant="destructive" type="submit">
-            Submit
-          </Button>
+
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>

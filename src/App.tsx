@@ -1,16 +1,17 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/home";
-import ShopPage from "./pages/shop";
-import AboutPage from "./pages/about";
-import ContactPage from "./pages/contact";
-import NotfoundPage from "./pages/notfound";
+import "./App.css";
 import LayoutWebsite from "./components/LayoutWebsite";
-import DetailProduct from "./pages/detail-product";
 import LayoutAdmin from "./components/layouts/LayoutAdmin";
+import { Toaster } from "./components/ui/toaster";
+import AboutPage from "./pages/about";
 import ProductManagement from "./pages/admin/product";
 import ProductAdd from "./pages/admin/product/add";
 import ProductEditPage from "./pages/admin/product/edit";
+import ContactPage from "./pages/contact";
+import DetailProduct from "./pages/detail-product";
+import HomePage from "./pages/home";
+import NotfoundPage from "./pages/notfound";
+import ShopPage from "./pages/shop";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
+      <Toaster />
     </>
   );
 }
