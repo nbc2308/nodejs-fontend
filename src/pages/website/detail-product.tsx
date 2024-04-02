@@ -1,6 +1,13 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { getProductById } from "@/services/product";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { useParams } from "react-router-dom";
 
 const DetailProduct = () => {
@@ -9,6 +16,8 @@ const DetailProduct = () => {
     queryKey: ["PRODUCT_KEY", id],
     queryFn: async () => await getProductById(id as string),
   });
+  console.log(data);
+
   if (isLoading) {
     return <p>Loading.....</p>;
   }
@@ -21,14 +30,6 @@ const DetailProduct = () => {
               src="https://picsum.photos/id/10/1440/500"
               className="banner__img"
             />
-            <div className="banner__text">
-              {/* Đổi tên lớp thành banner__text */}
-              <h1>Shop</h1>
-              <span>
-                <a href="index.html">Home</a> &gt;
-                <a href="shop.html">Product information</a>
-              </span>
-            </div>
           </div>
         </section>
         {/*End .banner*/}
@@ -41,17 +42,31 @@ const DetailProduct = () => {
               color: "rgba(159, 159, 159, 1)",
             }}
           >
-            Home &gt; Shop &gt; | Products Details
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Detail Product</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </h2>
         </section>
         {/* end-controller-shop */}
         <section className="product-info-shop">
           <div className="image-product">
             <div className="info-colums">
-              <img src="./assets/info1.svg" />
-              <img src="./assets/info2.svg" />
-              <img src="./assets/info3.svg" />
-              <img src="./assets/info4.svg" />
+              <img src="/../src/assets/info2.svg" />
+              <img src="/../src/assets/info1.svg" />
+              <img src="/../src/assets/info3.svg" />
+              <img src="/../src/assets/info4.svg" />
             </div>
             <img width={400} src={data.image} />
           </div>
@@ -59,11 +74,11 @@ const DetailProduct = () => {
             <p style={{ fontSize: 42 }}>{data.name}</p>
             <p>{data.price}đ</p>
             <p>
-              <img src="./assets/icons/star.svg" />
-              <img src="./assets/icons/star.svg" />
-              <img src="./assets/icons/star.svg" />
-              <img src="./assets/icons/star.svg" />
-              <img src="./assets/icons/star.svg" /> |
+              <img src="/../src/assets/icons/star.svg" />
+              <img src="/../src/assets/icons/star.svg" />
+              <img src="/../src/assets/icons/star.svg" />
+              <img src="/../src/assets/icons/star.svg" />
+              <img src="/../src/assets/icons/star.svg" /> |
               <span>5 Customer Review</span>
             </p>
             <p>{data.description}</p>

@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import LayoutWebsite from "./components/LayoutWebsite";
-import LayoutAdmin from "./components/layouts/LayoutAdmin";
 import { Toaster } from "./components/ui/toaster";
-import AboutPage from "./pages/about";
-import ProductManagement from "./pages/admin/product";
-import ProductAdd from "./pages/admin/product/add";
-import ProductEditPage from "./pages/admin/product/edit";
-import ContactPage from "./pages/contact";
-import DetailProduct from "./pages/detail-product";
-import HomePage from "./pages/home";
-import NotfoundPage from "./pages/notfound";
-import ShopPage from "./pages/shop";
+import AboutPage from "./pages/website/about";
+import ProductManagement from "./pages/admin/product/pages";
+import ProductAdd from "./pages/admin/product/_components/add";
+import ProductEditPage from "./pages/admin/product/_components/edit";
+import ContactPage from "./pages/website/contact";
+import DetailProduct from "./pages/website/detail-product";
+import HomePage from "./pages/website/home";
+import NotfoundPage from "./pages/website/notfound";
+import ShopPage from "./pages/website/shop";
+import LayoutAdmin from "./pages/admin/LayoutAdmin";
 
 function App() {
   return (

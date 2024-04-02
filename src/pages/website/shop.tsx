@@ -1,5 +1,4 @@
-import { Header, New } from "@/components";
-import React from "react";
+import { New } from "@/components";
 
 const ShopPage = () => {
   return (
