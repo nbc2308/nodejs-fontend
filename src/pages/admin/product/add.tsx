@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -8,42 +7,55 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
+
 import { Input } from "@/components/ui/input";
 import { IProduct } from "@/interfaces/product";
 import { addProduct } from "@/services/product";
-import { productShema } from "@/validations/formValidations";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation } from "@tanstack/react-query";
+import Joi from "joi";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 
 type Inputs = {
   name: string;
+  category?: string;
   price: number;
-  // category?: string;
+  // gallery?: string[];
   image: string;
-
-  // // gallery?: string[];
   description: string;
   discount: number;
   featured: boolean;
   countInStock: number;
 };
 
+const productSchema = Joi.object({
+  name: Joi.string().required(),
+  price: Joi.number().required(),
+  category: Joi.string(),
+  // gallery: Joi.array().items(Joi.string()),
+  image: Joi.string(),
+  description: Joi.string(),
+  discount: Joi.number(),
+  featured: Joi.boolean(),
+  countInStock: Joi.number(),
+});
+
 const ProductAdd = () => {
   const { toast } = useToast();
   const form = useForm({
-    resolver: joiResolver(productShema),
+    resolver: joiResolver(productSchema),
     defaultValues: {
       name: "",
       price: 0,
-      // category: "",
-      // // gallery: [],
+      category: "",
+      // gallery: [],
+      image: "",
       description: "",
       discount: 0,
       featured: false,
       countInStock: 0,
-      image: "",
     },
   });
 
@@ -60,13 +72,13 @@ const ProductAdd = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (product: IProduct) => {
+  const onSubmit: SubmitHandler<Inputs> = (product) => {
     mutation.mutate(product);
-    console.log(product);
   };
-
   return (
     <div>
+      <h2 className="text-2xl font-semibold">Thêm sản phẩm</h2>
+      <hr className="my-5" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -81,23 +93,21 @@ const ProductAdd = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
-
+          ></FormField>
           <FormField
             control={form.control}
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="price">Price</FormLabel>
+                <FormLabel htmlFor="price">Giá</FormLabel>
                 <FormControl>
                   <Input {...field} id="price" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
-          />
-
-          {/* <FormField
+          ></FormField>
+          <FormField
             control={form.control}
             name="category"
             render={({ field }) => (
@@ -109,8 +119,20 @@ const ProductAdd = () => {
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
-
+          ></FormField>
+          {/* <FormField
+                        control={form.control}
+                        name="gallery"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel htmlFor="gallery">Gallery</FormLabel>
+                                <FormControl>
+                                    <Input {...field} id="gallery" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    /> */}
           <FormField
             control={form.control}
             name="image"
@@ -124,7 +146,6 @@ const ProductAdd = () => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="description"
@@ -138,7 +159,6 @@ const ProductAdd = () => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="discount"
@@ -152,7 +172,6 @@ const ProductAdd = () => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="featured"
@@ -165,14 +184,15 @@ const ProductAdd = () => {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel htmlFor="featured">Featured?</FormLabel>
+                  <FormLabel>Featured?</FormLabel>
                 </div>
                 <FormMessage />
               </FormItem>
             )}
           />
-
-          <Button type="submit">Submit</Button>
+          <Button variant="destructive" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
