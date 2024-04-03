@@ -1,4 +1,4 @@
-import { IProduct } from "@/interfaces/product";
+import { IProduct } from "@/common/types/product";
 import { getAllProducts } from "@/services/product";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";

@@ -10,7 +10,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { Input } from "@/components/ui/input";
-import { IProduct } from "@/interfaces/product";
+import { IProduct } from "@/common/types/product";
 import { addProduct } from "@/services/product";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useMutation } from "@tanstack/react-query";

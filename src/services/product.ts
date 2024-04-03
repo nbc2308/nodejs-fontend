@@ -1,5 +1,5 @@
 import instance from "@/configs/axios";
-import { IProduct } from "@/interfaces/product";
+import { IProduct } from "@/common/types/product";
 
 export const getAllProducts = async (): Promise<IProduct[]> => {
   try {

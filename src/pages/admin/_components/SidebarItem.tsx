@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { LucideIcon } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 type SidebarItemProps = {
