@@ -16,7 +16,6 @@ const DetailProduct = () => {
     queryKey: ["PRODUCT_KEY", id],
     queryFn: async () => await getProductById(id as string),
   });
-  console.log(data);
 
   if (isLoading) {
     return <p>Loading.....</p>;

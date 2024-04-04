@@ -68,6 +68,7 @@ const ProductAdd = () => {
       form.reset();
       toast({
         title: "Thêm sản phẩm thành công",
+        variant: "success",
       });
     },
   });
@@ -190,7 +191,7 @@ const ProductAdd = () => {
               </FormItem>
             )}
           />
-          <Button variant="destructive" type="submit">
+          <Button className="bg-green-400" variant="destructive" type="submit">
             Submit
           </Button>
         </form>
