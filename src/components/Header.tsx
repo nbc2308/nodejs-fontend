@@ -3,7 +3,7 @@ import user2 from "@/assets/icons/2.svg";
 import user3 from "@/assets/icons/3.svg";
 import user4 from "@/assets/icons/4.svg";
 import Logo from "@/assets/logo.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -43,9 +43,9 @@ const Header = () => {
           <div className="header-items">
             <div className="header-item-user">
               <span>
-                <a href="login.html">
+                <Link to={"/signin"}>
                   <img src={user} />
-                </a>
+                </Link>
               </span>
             </div>
             <div className="header-item-user">
@@ -59,11 +59,11 @@ const Header = () => {
               </span>
             </div>
             <div className="header-item-user">
-              <a href="cart.html">
+              <Link to={`/cart`}>
                 <span>
                   <img src={user4} />
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

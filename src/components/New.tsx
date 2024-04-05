@@ -1,9 +1,38 @@
+import { useLocalStorage } from "@/common/hooks/useStorage";
 import { IProduct } from "@/common/types/product";
 import { getAllProducts } from "@/services/product";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const New = () => {
+  const queryClient = useQueryClient();
+  const [user] = useLocalStorage("user", {});
+  const userId = user?.user?._id;
+  const { mutate } = useMutation({
+    mutationFn: async ({
+      productId,
+      quantity,
+    }: {
+      productId: string;
+      quantity: number;
+    }) => {
+      const { data } = await axios.post(
+        `http://localhost:8080/api/v1/carts/add-to-cart`,
+        {
+          productId,
+          quantity,
+          userId,
+        }
+      );
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["carts", userId],
+      });
+    },
+  });
   const {
     data: products,
     isLoading,
@@ -12,6 +41,7 @@ const New = () => {
     queryKey: ["PRODUCT_KEY"],
     queryFn: getAllProducts,
   });
+
   if (isLoading) {
     return <p>Loading....</p>;
   }
@@ -57,7 +87,12 @@ const New = () => {
                   >
                     Quick View
                   </Link>
-                  <button className="btn product-action__addtocart">
+                  <button
+                    className="btn product-action__addtocart"
+                    onClick={() =>
+                      mutate({ productId: product._id, quantity: 2 })
+                    }
+                  >
                     Add To Cart
                   </button>
                   <div className="product-actions-more">

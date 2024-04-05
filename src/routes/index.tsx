@@ -11,6 +11,8 @@ import HomePage from "@/pages/website/home";
 import NotfoundPage from "@/pages/website/notfound";
 import ShopPage from "@/pages/website/shop";
 import LayoutAdmin from "@/pages/admin/LayoutAdmin";
+import Signin from "@/pages/website/signin";
+import CartPage from "@/pages/website/Cart";
 
 function Router() {
   return (
@@ -22,6 +24,8 @@ function Router() {
           <Route path="product/:id" element={<DetailProduct />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="signin" element={<Signin />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotfoundPage />} />
         </Route>
         <Route path="admin" element={<LayoutAdmin />}>
