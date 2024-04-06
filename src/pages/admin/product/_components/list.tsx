@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import {
   ColumnFiltersState,
@@ -11,25 +12,23 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Plus } from "lucide-react";
-import { Link } from "react-router-dom";
 
 import { useProductQuery } from "@/common/hooks/useProductQuery";
 import { useState } from "react";
 import { columns } from "./Column";
-import DataTable from "./DataTable";
+import Datatable from "./DataTable";
 import FooterTable from "./FooterTable";
 import HeaderTable from "./HeaderTable";
 
 const ProductList = () => {
-  const { data, isLoading } = useProductQuery({ _expand: "category" });
+  const { data } = useProductQuery();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
-    data: data?.data ?? [],
+    data: data ?? [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -46,6 +45,7 @@ const ProductList = () => {
       rowSelection,
     },
   });
+
   return (
     <>
       <div className="flex justify-between items-center py-3">
@@ -60,54 +60,9 @@ const ProductList = () => {
       <hr />
       <div className="my-5">
         <div className="w-full">
-          <div className="flex items-center py-4">
-            <HeaderTable table={table} />
-          </div>
+          <HeaderTable table={table} />
           <div className="rounded-md border">
-            {isLoading ? (
-              <>
-                <table className="w-full">
-                  <thead>
-                    <th>
-                      <Skeleton className="w-full h-[25px] rounded-full" />
-                    </th>
-                    <th>
-                      <Skeleton className="w-full h-[25px] rounded-full" />
-                    </th>
-                    <th>
-                      <Skeleton className="w-full h-[25px] rounded-full" />
-                    </th>
-                    <th>
-                      <Skeleton className="w-full h-[25px] rounded-full" />
-                    </th>
-                    <th>
-                      <Skeleton className="w-full h-[25px] rounded-full" />
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <Skeleton className="w-full h-[25px] rounded-full" />
-                      </td>
-                      <td>
-                        <Skeleton className="w-full h-[25px] rounded-full" />
-                      </td>
-                      <td>
-                        <Skeleton className="w-full h-[25px] rounded-full" />
-                      </td>
-                      <td>
-                        <Skeleton className="w-full h-[25px] rounded-full" />
-                      </td>
-                      <td>
-                        <Skeleton className="w-full h-[25px] rounded-full" />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </>
-            ) : (
-              <DataTable table={table} column={columns} />
-            )}
+            <Datatable table={table} columns={columns} />
           </div>
           <div className="flex items-center justify-end space-x-2 py-4">
             <FooterTable table={table} />

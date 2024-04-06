@@ -1,13 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocalStorage } from "./useStorage";
-import axios from "axios";
 import { debounce, reduce } from "lodash";
 import { ChangeEvent } from "react";
+import axios from "axios";
 
 const useCart = () => {
   const queryClient = useQueryClient();
   const [user] = useLocalStorage("user", {});
   const userId = user?.user?._id;
+  console.log(userId);
 
   const { data, ...restQuery } = useQuery({
     queryKey: ["cart", userId],

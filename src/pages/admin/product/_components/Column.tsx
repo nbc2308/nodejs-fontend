@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 export const columns: ColumnDef<IProduct>[] = [
   {
@@ -40,23 +40,20 @@ export const columns: ColumnDef<IProduct>[] = [
     header: "Ảnh",
     cell: ({ row }) => {
       const { image } = row.original;
-      return <img src={image} width={50} />;
+      return <img src={image} width={70} />;
     },
   },
   {
     accessorKey: "name",
     header: "Tên sản phẩm",
   },
-  //   {
-  //     accessorKey: "category",
-  //     header: "Danh mục",
-  //     cell: ({ row }) => {
-  //       return <div>{row?.original?.category?.name}</div>;
-  //     },
-  //   },
+  {
+    accessorKey: "category",
+    header: "Danh mục",
+  },
   {
     accessorKey: "price",
-    header: "Giá",
+    header: () => <div className="text-red">Giá</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("price"));
 
@@ -66,9 +63,10 @@ export const columns: ColumnDef<IProduct>[] = [
         currency: "USD",
       }).format(amount);
 
-      return <div className="font-medium">{formatted}</div>;
+      return <div className=" font-medium">{formatted}</div>;
     },
   },
+
   {
     accessorKey: "featured",
     header: "Trạng thái",
@@ -77,18 +75,21 @@ export const columns: ColumnDef<IProduct>[] = [
       return <div>{featured ? "Checked" : "unchecked"}</div>;
     },
   },
+
   {
     accessorKey: "countInStock",
-    header: "Số lượng",
+    header: () => <div>Số lượng</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("countInStock"));
-      return <div className="font-medium">{amount}</div>;
+      return <div className=" font-medium">{amount}</div>;
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const payment = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
