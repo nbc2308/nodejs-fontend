@@ -13,6 +13,7 @@ import ShopPage from "@/pages/website/shop";
 import LayoutAdmin from "@/pages/admin/LayoutAdmin";
 import Signin from "@/pages/website/signin";
 import CartPage from "@/pages/website/Cart";
+import Signup from "@/pages/website/signup";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotfoundPage />} />
         </Route>

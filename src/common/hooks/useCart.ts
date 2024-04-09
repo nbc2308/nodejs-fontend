@@ -1,8 +1,8 @@
+import instance from "@/configs/axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useLocalStorage } from "./useStorage";
 import { debounce, reduce } from "lodash";
 import { ChangeEvent } from "react";
-import axios from "axios";
+import { useLocalStorage } from "./useStorage";
 
 const useCart = () => {
   const queryClient = useQueryClient();
@@ -13,16 +13,14 @@ const useCart = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: ["cart", userId],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:8080/api/v1/carts/${userId}`
-      );
+      const { data } = await instance.get(`/carts/${userId}`);
       return data;
     },
   });
 
   const updateQuantityDebounce = debounce(
     async (productId, quantity: number) => {
-      await axios.post(`http://localhost:8080/api/v1/carts/update`, {
+      await instance.post(`/carts/update`, {
         userId,
         productId,
         quantity,
@@ -44,19 +42,19 @@ const useCart = () => {
     }) => {
       switch (action) {
         case "INCREMENT":
-          await axios.post(`http://localhost:8080/api/v1/carts/increase`, {
+          await instance.post(`/carts/increase`, {
             userId,
             productId,
           });
           break;
         case "DECREMENT":
-          await axios.post(`http://localhost:8080/api/v1/carts/decrease`, {
+          await instance.post(`/carts/decrease`, {
             userId,
             productId,
           });
           break;
         case "REMOVE":
-          await axios.post(`http://localhost:8080/api/v1/carts/remove`, {
+          await instance.post(`/carts/remove`, {
             userId,
             productId,
           });

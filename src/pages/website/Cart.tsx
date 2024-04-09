@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import useCart from "@/common/hooks/useCart";
 import { ChangeEvent } from "react";
 
